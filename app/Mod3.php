@@ -39,6 +39,6 @@ class Mod3
             $this->fsm->runTransition(input: $input);
         }
 
-        return $this->fsm->returnFinalState()['output'];
+        return $this->fsm->returnFinalState()['state_output'];
     }
 }
