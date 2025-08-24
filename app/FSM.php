@@ -8,7 +8,7 @@ class FSM
 {
     private array $states;
     private string $initialStateName;
-    private string $currentStateName;
+    private string $finalStateName;
 
     public function __construct(
         public readonly array $inputs
@@ -20,13 +20,13 @@ class FSM
     public function addState(
         string $name,
         string $output,
+        bool $isFinal = true,
         bool $isInitial = false,
-        bool $isFinal = false
     )
     {
         $this->states[$name] = new State(name: $name, output: $output, isFinal: $isFinal);
         if ($isInitial) {
-            $this->currentStateName = $this->initialStateName = $name;
+            $this->finalStateName = $this->initialStateName = $name;
         }
     }
 
@@ -87,22 +87,22 @@ class FSM
             throw new Exception('Input not recognized in this FSM');
         }
 
-        $currentState = $this->states[$this->currentStateName];
+        $finalState = $this->states[$this->finalStateName];
 
-        // Set new state for FSM
-        $this->currentStateName = $currentState->getResultState(input: $input);
+        // Set final state for FSM
+        $this->finalStateName = $finalState->getResultState(input: $input);
     }
 
-    public function returnCurrentState()
+    public function returnFinalState()
     {
-        $currentState = $this->states[$this->currentStateName];
-        if (!$currentState->isFinal) {
+        $finalState = $this->states[$this->finalStateName];
+        if (!$finalState->isFinal) {
             throw new Exception('This state is not final');
         }
 
         return [
-            'state_name' => $currentState->name,
-            'state_output' => $currentState->output
+            'state_name' => $finalState->name,
+            'state_output' => $finalState->output
         ];
     }
 }
