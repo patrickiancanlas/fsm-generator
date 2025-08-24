@@ -71,12 +71,12 @@ class FSM
         $this->states[$stateName]->removeTransition(input: $input);
     }
 
-    private function doesStateExists(string $name)
+    public function doesStateExists(string $name)
     {
         return array_key_exists($name, $this->states);
     }
 
-    private function doesInputExists(string $input)
+    public function doesInputExists(string $input)
     {
         return in_array($input, $this->inputs, true);
     }

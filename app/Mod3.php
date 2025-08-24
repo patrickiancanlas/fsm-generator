@@ -10,9 +10,7 @@ class Mod3
 
     public function __construct()
     {
-        $inputs = ['0', '1'];
-
-        $this->fsm = new FSM($inputs);
+        $this->fsm = new FSM(inputs: ['0', '1']);
 
         // Add states
         $this->fsm->addState(name: 'S0', output: '0', isFinal: true, isInitial: true);
