@@ -44,27 +44,27 @@ class FSM
 
     public function addStateTransition(string $stateName, string $input, string $resultState)
     {
-        if ($this->doesStateExists(name: $stateName)) {
+        if (!$this->doesStateExists(name: $stateName)) {
             throw new Exception('This state does not exist');
         }
 
-        if ($this->doesInputExists(input: $input)) {
+        if (!$this->doesInputExists(input: $input)) {
             throw new Exception('Input not recognized in this FSM');
         }
 
-        if ($this->doesStateExists(name: $resultState)) {
+        if (!$this->doesStateExists(name: $resultState)) {
             throw new Exception('Result state does not exist');
         }
 
-        $this->states[$stateName]->addTransition(input: $input, newState: $resultState);
+        $this->states[$stateName]->addTransition(input: $input, resultState: $resultState);
     }
 
     public function removeStateTransition(string $stateName, string $input) {
-        if ($this->doesStateExists(name: $stateName)) {
+        if (!$this->doesStateExists(name: $stateName)) {
             throw new Exception('This state does not exist');
         }
 
-        if ($this->doesInputExists(input: $input)) {
+        if (!$this->doesInputExists(input: $input)) {
             throw new Exception('Wrong input');
         }
 
@@ -73,17 +73,17 @@ class FSM
 
     private function doesStateExists(string $name)
     {
-        return !array_key_exists($name, $this->states);
+        return array_key_exists($name, $this->states);
     }
 
     private function doesInputExists(string $input)
     {
-        return in_array($input, $this->inputs);
+        return in_array($input, $this->inputs, true);
     }
 
     public function runTransition(string $input)
     {
-        if ($this->doesInputExists($input)) {
+        if (!$this->doesInputExists($input)) {
             throw new Exception('Input not recognized in this FSM');
         }
 
