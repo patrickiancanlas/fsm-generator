@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Commands;
+namespace App\Console\Commands;
 
 use App\Mod3;
-use Illuminate\Console\Scheduling\Schedule;
-use LaravelZero\Framework\Commands\Command;
+use Illuminate\Console\Command;
 
 class Mod3Command extends Command
 {
@@ -35,14 +34,6 @@ class Mod3Command extends Command
         $mod3 = new Mod3();
         $this->info('The remainder is ' . $mod3->run(binaryInteger: $input));
         return 0;
-    }
-
-    /**
-     * Define the command's schedule.
-     */
-    public function schedule(Schedule $schedule): void
-    {
-        // $schedule->command(static::class)->everyMinute();
     }
 
     private function isStringBinary($stringNumber)

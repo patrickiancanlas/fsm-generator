@@ -2,28 +2,26 @@
 
 ## Instructions
 
-1. Install DDEV
-
-    - [Windows WSL2 + Docker CE](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/#wsl2-docker-ce-install-script)
-    - [macOS](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/#ddev-installation-macos)
-    - [Linux](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/#ddev-installation-linux)
-
-2. Clone this repository to your desired folder location
+1. Clone this repository to your desired folder location
 
     - `git clone https://github.com/patrickiancanlas/fsm-generator.git`
 
-3. Start DDEV
+2. Install Composer packages
 
-    - `ddev start`
+    - `composer i`
 
-4. Install Composer packages
+3. Build Docker files
 
-    - `ddev composer i`
+-   `docker compose build`
+
+4. Start Docker
+
+-   `docker compose up -d`
 
 5. Run Mod3 Command
 
-    - `ddev php application app:mod3-command`
+    - `docker compose run web php artisan app:mod3-command`
 
 6. Run Tests
 
-    - `ddev php application test`
+    - `docker compose run web php artisan test`
